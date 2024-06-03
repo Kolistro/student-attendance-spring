@@ -33,8 +33,8 @@ public class ServiceConfig {
     }
 
     @Bean
-    public AttendanceService attendanceService(AttendanceRepo attendanceRepo) {
-        return new AttendanceService(attendanceRepo);
+    public AttendanceService attendanceService(AttendanceRepo attendanceRepo, GroupRepo groupRepo, LessonRepo lessonRepo) {
+        return new AttendanceService(attendanceRepo, groupRepo, lessonRepo);
     }
 
 

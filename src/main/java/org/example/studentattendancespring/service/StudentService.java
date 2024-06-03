@@ -1,11 +1,8 @@
 package org.example.studentattendancespring.service;
 
-import org.example.studentattendancespring.entity.LessonEntity;
 import org.example.studentattendancespring.entity.StudentEntity;
-import org.example.studentattendancespring.entity.TeacherEntity;
 import org.example.studentattendancespring.exception.GroupNotFoundException;
 import org.example.studentattendancespring.exception.StudentNotFoundException;
-import org.example.studentattendancespring.model.dto.Lesson;
 import org.example.studentattendancespring.model.dto.Student;
 import org.example.studentattendancespring.repository.GroupRepo;
 import org.example.studentattendancespring.repository.StudentRepo;

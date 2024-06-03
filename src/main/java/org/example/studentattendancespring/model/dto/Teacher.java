@@ -1,7 +1,5 @@
 package org.example.studentattendancespring.model.dto;
 
-
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.studentattendancespring.entity.TeacherEntity;

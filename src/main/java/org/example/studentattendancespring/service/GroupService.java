@@ -1,13 +1,9 @@
 package org.example.studentattendancespring.service;
 
-import org.example.studentattendancespring.entity.AttendanceEntity;
 import org.example.studentattendancespring.entity.GroupEntity;
-import org.example.studentattendancespring.entity.TeacherEntity;
 import org.example.studentattendancespring.exception.GroupNotFoundException;
 import org.example.studentattendancespring.exception.GroupWithNameAlreadyExistsException;
-import org.example.studentattendancespring.model.dto.Attendance;
 import org.example.studentattendancespring.model.dto.Group;
-import org.example.studentattendancespring.model.dto.Teacher;
 import org.example.studentattendancespring.repository.GroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

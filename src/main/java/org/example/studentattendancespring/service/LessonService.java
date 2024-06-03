@@ -1,12 +1,9 @@
 package org.example.studentattendancespring.service;
 
-import org.example.studentattendancespring.entity.GroupEntity;
 import org.example.studentattendancespring.entity.LessonEntity;
-import org.example.studentattendancespring.entity.StudentEntity;
 import org.example.studentattendancespring.exception.*;
-import org.example.studentattendancespring.model.dto.Group;
 import org.example.studentattendancespring.model.dto.Lesson;
-import org.example.studentattendancespring.model.dto.Student;
+import org.example.studentattendancespring.model.dto.LessonWithoutAttendance;
 import org.example.studentattendancespring.repository.GroupRepo;
 import org.example.studentattendancespring.repository.LessonRepo;
 import org.example.studentattendancespring.repository.TeacherRepo;
@@ -33,7 +30,7 @@ public class LessonService {
 
     public Lesson addLesson(LessonEntity lesson) {
         if(lessonRepo.findByDateAndLessonNumber(lesson.getDate(), lesson.getLessonNumber()) != null) {
-            throw new LessonDateAndNumberBusyException("Дата и номер урока заняты!");
+            throw new LessonDateAndNumberExistsException("Дата и номер урока заняты!");
         }
         lessonRepo.save(lesson);
         return Lesson.toModel(lesson);
@@ -54,7 +51,7 @@ public class LessonService {
         return Lesson.toModel(lesson);
     }
 
-    public List<Lesson> getLessonsByGroup(Timestamp startDate, Timestamp endDate, Long groupId) {
+    public List<LessonWithoutAttendance> getLessonsByGroup(Timestamp startDate, Timestamp endDate, Long groupId) {
         if(groupRepo.findById(groupId).isEmpty()) {
             throw new GroupNotFoundException("Группа не найдена!");
         }
@@ -63,11 +60,11 @@ public class LessonService {
         }
         List<LessonEntity> lessonEntities = lessonRepo.findAllByDateBetweenAndGroupId(startDate, endDate, groupId);
         return lessonEntities.stream()
-                .map(Lesson::toModel)
+                .map(LessonWithoutAttendance::toModel)
                 .collect(Collectors.toList());
     }
 
-    public List<Lesson> getLessonsByTeacherId(Timestamp startDate, Timestamp endDate, Long teacherId) {
+    public List<LessonWithoutAttendance> getLessonsByTeacherId(Timestamp startDate, Timestamp endDate, Long teacherId) {
         if(teacherRepo.findById(teacherId).isEmpty()) {
             throw new TeacherNotFoundException("Преподаватель не найден!");
         }
@@ -76,7 +73,7 @@ public class LessonService {
         }
         List<LessonEntity> lessonEntities = lessonRepo.findAllByDateBetweenAndTeacherId(startDate, endDate, teacherId);
         return lessonEntities.stream()
-                .map(Lesson::toModel)
+                .map(LessonWithoutAttendance::toModel)
                 .collect(Collectors.toList());
     }
 

@@ -1,9 +1,7 @@
 package org.example.studentattendancespring.service;
 
-import org.example.studentattendancespring.entity.AttendanceEntity;
 import org.example.studentattendancespring.entity.TeacherEntity;
 import org.example.studentattendancespring.exception.TeacherNotFoundException;
-import org.example.studentattendancespring.model.dto.Attendance;
 import org.example.studentattendancespring.model.dto.Teacher;
 import org.example.studentattendancespring.repository.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;

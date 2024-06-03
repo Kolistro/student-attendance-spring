@@ -11,10 +11,12 @@ import java.util.Map;
 @Setter
 public class Attendance {
     private Map<StudentEntity, Boolean> students;
+    private LessonWithoutAttendance lesson;
 
     public static Attendance toModel(AttendanceEntity attendance){
         Attendance model = new Attendance();
         model.setStudents(attendance.getStudents());
+        model.setLesson(LessonWithoutAttendance.toModel(attendance.getLesson()));
         return model;
     }
 }

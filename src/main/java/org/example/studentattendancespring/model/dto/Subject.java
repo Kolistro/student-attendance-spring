@@ -1,6 +1,5 @@
 package org.example.studentattendancespring.model.dto;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import org.example.studentattendancespring.entity.SubjectEntity;

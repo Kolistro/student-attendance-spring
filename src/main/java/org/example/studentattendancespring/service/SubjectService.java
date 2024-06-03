@@ -1,14 +1,9 @@
 package org.example.studentattendancespring.service;
 
-import org.example.studentattendancespring.entity.StudentEntity;
 import org.example.studentattendancespring.entity.SubjectEntity;
-import org.example.studentattendancespring.entity.TeacherEntity;
 import org.example.studentattendancespring.exception.SubjectNotFoundException;
 import org.example.studentattendancespring.exception.SubjectWithSameNameAlreadyExistsException;
-import org.example.studentattendancespring.exception.TeacherNotFoundException;
-import org.example.studentattendancespring.model.dto.Student;
 import org.example.studentattendancespring.model.dto.Subject;
-import org.example.studentattendancespring.model.dto.Teacher;
 import org.example.studentattendancespring.repository.SubjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
