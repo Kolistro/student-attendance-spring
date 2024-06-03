@@ -11,7 +11,7 @@ public class Subject {
 
     public static Subject toModel(SubjectEntity subject){
         Subject model = new Subject();
-        model.setSubjectName(subject.getSubjectName());
+        model.setSubjectName(subject.getName());
         return model;
     }
 

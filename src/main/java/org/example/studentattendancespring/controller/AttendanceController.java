@@ -65,13 +65,13 @@ public class AttendanceController {
         }
     }
 
-    @GetMapping("/attendances")
-    public ResponseEntity<CommonResponse<List<Attendance>>> getAttendancesByGroupId(@RequestBody Long groupId) {
+    @GetMapping("attendances/group")
+    public ResponseEntity<CommonResponse<List<Attendance>>> getAttendancesByGroupId(@RequestBody Long id) {
         CommonResponse<List<Attendance>> commonResponse;
         HttpStatus status;
         try {
             status = HttpStatus.OK;
-            commonResponse = new CommonResponse<>(attendanceService.getAttendancesByGroupId(groupId), status.value());
+            commonResponse = new CommonResponse<>(attendanceService.getAttendancesByGroupId(id), status.value());
             return ResponseEntity.ok(commonResponse);
         }catch (Exception e){
             status = HttpStatus.BAD_REQUEST;
@@ -79,13 +79,13 @@ public class AttendanceController {
         }
     }
 
-    @GetMapping("/attendances")
-    public ResponseEntity<CommonResponse<List<Attendance>>> getAttendancesByLessonId(@RequestBody Long lessonId) {
+    @GetMapping("attendances/lesson")
+    public ResponseEntity<CommonResponse<List<Attendance>>> getAttendancesByLessonId(@RequestBody Long id) {
         CommonResponse<List<Attendance>> commonResponse;
         HttpStatus status;
         try {
             status = HttpStatus.OK;
-            commonResponse = new CommonResponse<>(attendanceService.getAttendancesByLessonId(lessonId), status.value());
+            commonResponse = new CommonResponse<>(attendanceService.getAttendancesByLessonId(id), status.value());
             return ResponseEntity.ok(commonResponse);
         }catch (Exception e){
             status = HttpStatus.BAD_REQUEST;
@@ -93,7 +93,7 @@ public class AttendanceController {
         }
     }
 
-    @GetMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<CommonResponse<Long>> deleteAttendance(@PathVariable Long id) {
         CommonResponse<Long> commonResponse;
         HttpStatus status;

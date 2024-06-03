@@ -67,7 +67,7 @@ public class LessonController {
         }
     }
 
-    @GetMapping("/lessons")
+    @GetMapping("/lessons/group")
     public ResponseEntity<CommonResponse<List<LessonWithoutAttendance>>> getLessonsByGroup(
             @RequestParam(required = false) Timestamp startDate,
             @RequestParam(required = false) Timestamp endDate,
@@ -85,7 +85,7 @@ public class LessonController {
         }
     }
 
-    @GetMapping("/lessons")
+    @GetMapping("/lessons/teacher")
     public ResponseEntity<CommonResponse<List<LessonWithoutAttendance>>> getLessonsByTeacher(
             @RequestParam(required = false) Timestamp startDate,
             @RequestParam(required = false) Timestamp endDate,

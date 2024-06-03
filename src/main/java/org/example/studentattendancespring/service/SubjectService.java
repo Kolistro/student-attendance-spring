@@ -21,7 +21,7 @@ public class SubjectService {
     }
 
     public Subject addSubject(SubjectEntity subject) {
-        if (subjectRepo.findByName(subject.getSubjectName())!=null){
+        if (subjectRepo.findByName(subject.getName())!=null){
             throw new SubjectWithSameNameAlreadyExistsException("Такой предмет уже существует!");
         }
         subjectRepo.save(subject);
@@ -31,7 +31,7 @@ public class SubjectService {
     public Subject editSubject(SubjectEntity subject) {
         SubjectEntity subjectEntity = subjectRepo.findById(subject.getId())
                 .orElseThrow(()-> new SubjectNotFoundException("Предмет не найден!"));
-        subjectEntity.setSubjectName(subject.getSubjectName());
+        subjectEntity.setName(subject.getName());
         subjectRepo.save(subjectEntity);
         return Subject.toModel(subject);
     }
