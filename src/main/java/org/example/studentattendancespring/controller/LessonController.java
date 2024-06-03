@@ -8,6 +8,7 @@ import org.example.studentattendancespring.service.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/lesson")
+@Validated
 public class LessonController {
     private final LessonService lessonService;
 

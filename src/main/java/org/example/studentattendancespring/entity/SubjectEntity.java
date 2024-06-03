@@ -16,7 +16,7 @@ public class SubjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Название предмета не может быть пустым")
     private String subjectName;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)

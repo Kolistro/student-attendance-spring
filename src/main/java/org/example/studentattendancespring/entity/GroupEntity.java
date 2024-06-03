@@ -17,7 +17,7 @@ public class GroupEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Название группы не может быть пустой")
     @Column(name = "group_name")
     private  String name;
 

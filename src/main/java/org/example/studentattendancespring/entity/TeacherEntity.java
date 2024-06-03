@@ -2,6 +2,7 @@ package org.example.studentattendancespring.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,11 +18,11 @@ public class TeacherEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Фамилия не может быть пустой")
     private String lastName;
-    @NotBlank
+    @NotBlank(message = "Имя не может быть пустым")
     private String firstName;
-    @NotBlank
+    @NotNull
     private String middleName;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
