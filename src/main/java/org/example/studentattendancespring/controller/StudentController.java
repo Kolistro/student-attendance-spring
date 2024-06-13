@@ -1,20 +1,19 @@
 package org.example.studentattendancespring.controller;
 
 import org.example.studentattendancespring.entity.StudentEntity;
-import org.example.studentattendancespring.model.dto.Student;
-import org.example.studentattendancespring.model.response.CommonResponse;
+import org.example.studentattendancespring.dto.response.Student;
+import org.example.studentattendancespring.dto.response.CommonResponse;
 import org.example.studentattendancespring.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/student")
-@Validated
+@RequestMapping(value = "/student", consumes = MediaType.APPLICATION_JSON_VALUE)
 public class StudentController {
     private final StudentService studentService;
 

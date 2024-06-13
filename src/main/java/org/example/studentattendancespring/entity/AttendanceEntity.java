@@ -1,17 +1,15 @@
 package org.example.studentattendancespring.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
+import org.apache.commons.lang3.builder.HashCodeExclude;
 
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 // посещение студентов
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "attendance")
 public class AttendanceEntity {
@@ -21,27 +19,38 @@ public class AttendanceEntity {
 
     @OneToOne
     @JoinColumn(name = "lesson_id")
-    @NotNull(message = "Укажите занятие")
     private LessonEntity lesson;
 
     @ManyToOne
     @JoinColumn(name = "groups_id")
-    @NotNull(message = "Укажите группу")
     private GroupEntity group;
 
-    @ElementCollection
-    @CollectionTable(name = "attendance_student_mapping",
-            joinColumns = @JoinColumn(name = "attendance_id"))
-    @MapKeyJoinColumn(name = "student_id")
-    @Column(name = "is_present")
-    @NotEmpty(message = "Необходимо указать студентов")
-    private Map<StudentEntity, Boolean> students;
+    @OneToMany(mappedBy = "attendance", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @HashCodeExclude
+    private Set<AttendanceStudentMappingEntity> studentMappings = new HashSet<>();
 
-    public void addStudent(StudentEntity student, boolean isPresent) {
-        students.put(student, isPresent);
+    public void addStudentMapping(StudentEntity student, Boolean isPresent) {
+        AttendanceStudentMappingEntity mapping = new AttendanceStudentMappingEntity();
+        mapping.setAttendance(this);
+        mapping.setStudent(student);
+        mapping.setIsPresent(isPresent);
+        studentMappings.add(mapping);
     }
 
-    public void removeStudent(StudentEntity student) {
-        students.remove(student);
+    public void addStudentMapping(AttendanceStudentMappingEntity mapping) {
+        mapping.setAttendance(this);
+        studentMappings.add(mapping);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AttendanceEntity that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getLesson(), that.getLesson()) && Objects.equals(getGroup(), that.getGroup());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getLesson(), getGroup());
     }
 }

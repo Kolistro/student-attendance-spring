@@ -1,4 +1,4 @@
-package org.example.studentattendancespring.model.response;
+package org.example.studentattendancespring.dto.response;
 
 import lombok.Getter;
 import lombok.ToString;

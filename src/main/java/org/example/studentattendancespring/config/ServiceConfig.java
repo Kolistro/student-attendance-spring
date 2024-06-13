@@ -5,6 +5,7 @@ import org.example.studentattendancespring.service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Configuration
 public class ServiceConfig {
     @Bean
@@ -23,8 +24,9 @@ public class ServiceConfig {
     }
 
     @Bean
-    public LessonService lessonService(LessonRepo lessonRepo, GroupRepo groupRepo, TeacherRepo teacherRepo) {
-        return new LessonService(lessonRepo, groupRepo, teacherRepo);
+    public LessonService lessonService(LessonRepo lessonRepo, GroupRepo groupRepo, TeacherRepo teacherRepo,
+                                       AttendanceRepo attendanceRepo, SubjectRepo subjectRepo) {
+        return new LessonService(lessonRepo, groupRepo, teacherRepo, attendanceRepo, subjectRepo);
     }
 
     @Bean
@@ -33,8 +35,9 @@ public class ServiceConfig {
     }
 
     @Bean
-    public AttendanceService attendanceService(AttendanceRepo attendanceRepo, GroupRepo groupRepo, LessonRepo lessonRepo) {
-        return new AttendanceService(attendanceRepo, groupRepo, lessonRepo);
+    public AttendanceService attendanceService(AttendanceRepo attendanceRepo, GroupRepo groupRepo,
+                                               LessonRepo lessonRepo,StudentRepo studentRepo, AttendanceStudentMappingRepo attendanceStudentMappingRepo) {
+        return new AttendanceService(attendanceRepo, groupRepo, lessonRepo, studentRepo, attendanceStudentMappingRepo);
     }
 
 

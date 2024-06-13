@@ -1,11 +1,12 @@
 package org.example.studentattendancespring.controller;
 
 import org.example.studentattendancespring.entity.SubjectEntity;
-import org.example.studentattendancespring.model.dto.Subject;
-import org.example.studentattendancespring.model.response.CommonResponse;
+import org.example.studentattendancespring.dto.response.Subject;
+import org.example.studentattendancespring.dto.response.CommonResponse;
 import org.example.studentattendancespring.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subject")
+@RequestMapping(value = "/subject", consumes = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 public class SubjectController {
     private final SubjectService subjectService;

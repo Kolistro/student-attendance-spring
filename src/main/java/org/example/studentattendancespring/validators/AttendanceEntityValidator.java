@@ -26,7 +26,7 @@ public class AttendanceEntityValidator implements Validator {
                 "NotEmpty.attendanceEntity.group",
                 "Укажите группу");
 
-        if (attendance.getStudents() == null || attendance.getStudents().isEmpty()) {
+        if (attendance.getStudentMappings() == null || attendance.getStudentMappings().isEmpty()) {
             errors.rejectValue(
                     "students",
                     "NotEmpty.attendanceEntity.students",

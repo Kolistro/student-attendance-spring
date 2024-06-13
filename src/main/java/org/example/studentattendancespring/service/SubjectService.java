@@ -3,7 +3,7 @@ package org.example.studentattendancespring.service;
 import org.example.studentattendancespring.entity.SubjectEntity;
 import org.example.studentattendancespring.exception.SubjectNotFoundException;
 import org.example.studentattendancespring.exception.SubjectWithSameNameAlreadyExistsException;
-import org.example.studentattendancespring.model.dto.Subject;
+import org.example.studentattendancespring.dto.response.Subject;
 import org.example.studentattendancespring.repository.SubjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class SubjectService {
         this.subjectRepo = subjectRepo;
     }
 
-    public Subject addSubject(SubjectEntity subject) {
+    public Subject addSubject(SubjectEntity subject) throws SubjectWithSameNameAlreadyExistsException{
         if (subjectRepo.findByName(subject.getName())!=null){
             throw new SubjectWithSameNameAlreadyExistsException("Такой предмет уже существует!");
         }
@@ -28,7 +28,7 @@ public class SubjectService {
         return Subject.toModel(subject);
     }
 
-    public Subject editSubject(SubjectEntity subject) {
+    public Subject editSubject(SubjectEntity subject) throws SubjectNotFoundException {
         SubjectEntity subjectEntity = subjectRepo.findById(subject.getId())
                 .orElseThrow(()-> new SubjectNotFoundException("Предмет не найден!"));
         subjectEntity.setName(subject.getName());
@@ -36,7 +36,7 @@ public class SubjectService {
         return Subject.toModel(subject);
     }
 
-    public Subject getSubject(Long id) {
+    public Subject getSubject(Long id) throws SubjectNotFoundException{
         SubjectEntity subject = subjectRepo.findById(id)
                 .orElseThrow(()-> new SubjectNotFoundException("Предмет не найден!"));
         return Subject.toModel(subject);

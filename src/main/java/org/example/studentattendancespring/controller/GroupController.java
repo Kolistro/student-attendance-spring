@@ -1,11 +1,12 @@
 package org.example.studentattendancespring.controller;
 
 import org.example.studentattendancespring.entity.GroupEntity;
-import org.example.studentattendancespring.model.dto.Group;
-import org.example.studentattendancespring.model.response.CommonResponse;
+import org.example.studentattendancespring.dto.response.Group;
+import org.example.studentattendancespring.dto.response.CommonResponse;
 import org.example.studentattendancespring.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/group")
+@RequestMapping(value = "/group", consumes = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 public class GroupController {
+    @Autowired
     private final GroupService groupService;
 
     @Autowired
@@ -24,8 +26,8 @@ public class GroupController {
     }
 
     @PostMapping
-    public ResponseEntity<CommonResponse<Group>> addGroup(@RequestBody GroupEntity group) {
-        CommonResponse<Group> commonResponse;
+    public ResponseEntity<CommonResponse<GroupEntity>> addGroup(@RequestBody GroupEntity group) {
+        CommonResponse<GroupEntity> commonResponse;
         HttpStatus status;
         try {
             status = HttpStatus.OK;
@@ -37,7 +39,7 @@ public class GroupController {
         }
     }
 
-    @PutMapping
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CommonResponse<Group>> editGroup(@RequestBody GroupEntity group) {
         CommonResponse<Group> commonResponse;
         HttpStatus status;
@@ -52,8 +54,8 @@ public class GroupController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CommonResponse<Group>> getGroup(@PathVariable Long id) {
-        CommonResponse<Group> commonResponse;
+    public ResponseEntity<CommonResponse<GroupEntity>> getGroup(@PathVariable Long id) {
+        CommonResponse<GroupEntity> commonResponse;
         HttpStatus status;
         try {
             status = HttpStatus.OK;

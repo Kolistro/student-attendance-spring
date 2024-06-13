@@ -3,7 +3,7 @@ package org.example.studentattendancespring.service;
 import org.example.studentattendancespring.entity.StudentEntity;
 import org.example.studentattendancespring.exception.GroupNotFoundException;
 import org.example.studentattendancespring.exception.StudentNotFoundException;
-import org.example.studentattendancespring.model.dto.Student;
+import org.example.studentattendancespring.dto.response.Student;
 import org.example.studentattendancespring.repository.GroupRepo;
 import org.example.studentattendancespring.repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,14 @@ public class StudentService {
         this.groupRepo = groupRepo;
     }
 
-    public Student addStudent(StudentEntity student) {
+    public Student addStudent(StudentEntity student) throws GroupNotFoundException{
+        groupRepo.findById(student.getGroup().getId())
+                .orElseThrow(() -> new GroupNotFoundException("Группа не найдена!"));
         studentRepo.save(student);
         return Student.toModel(student);
     }
 
-    public Student editStudent(StudentEntity student) {
+    public Student editStudent(StudentEntity student)throws StudentNotFoundException {
         StudentEntity studentEntity = studentRepo.findById(student.getId())
                 .orElseThrow(() -> new StudentNotFoundException("Студент не найден!"));
         studentEntity.setFirstName(student.getFirstName());
@@ -40,13 +42,13 @@ public class StudentService {
         return Student.toModel(student);
     }
 
-    public Student getStudent(Long id) {
+    public Student getStudent(Long id) throws StudentNotFoundException{
         StudentEntity student = studentRepo.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException("Студент не найден!"));
         return Student.toModel(student);
     }
 
-    public List<Student> getStudentsByGroup(Long idGroup) {
+    public List<Student> getStudentsByGroup(Long idGroup) throws GroupNotFoundException{
         if (groupRepo.findById(idGroup).isEmpty()) {
             throw new GroupNotFoundException("Группа не найдена!");
         }

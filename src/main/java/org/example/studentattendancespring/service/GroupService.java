@@ -3,10 +3,11 @@ package org.example.studentattendancespring.service;
 import org.example.studentattendancespring.entity.GroupEntity;
 import org.example.studentattendancespring.exception.GroupNotFoundException;
 import org.example.studentattendancespring.exception.GroupWithNameAlreadyExistsException;
-import org.example.studentattendancespring.model.dto.Group;
+import org.example.studentattendancespring.dto.response.Group;
 import org.example.studentattendancespring.repository.GroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,15 +21,15 @@ public class GroupService {
         this.groupRepo = groupRepo;
     }
 
-    public Group addGroup(GroupEntity group) {
+    public GroupEntity addGroup(GroupEntity group) throws GroupWithNameAlreadyExistsException{
         if(groupRepo.findByName(group.getName()) != null){
             throw new GroupWithNameAlreadyExistsException("Группа с таким именем уже существует!");
         }
         groupRepo.save(group);
-        return Group.toModel(group);
+        return group;
     }
 
-    public Group editGroup(GroupEntity group) {
+    public Group editGroup(GroupEntity group) throws GroupNotFoundException{
         GroupEntity groupEntity = groupRepo.findById(group.getId())
                 .orElseThrow(()-> new GroupNotFoundException("Группа не найдена!"));
         groupEntity.setName(group.getName());
@@ -36,10 +37,10 @@ public class GroupService {
         return Group.toModel(group);
     }
 
-    public Group getGroup(Long id) {
+    public GroupEntity getGroup(@PathVariable Long id) throws GroupNotFoundException{
         GroupEntity group = groupRepo.findById(id)
                 .orElseThrow(()-> new GroupNotFoundException("Группа не найдена!"));
-        return Group.toModel(group);
+        return group;
     }
 
     public List<Group> getAllGroups() {

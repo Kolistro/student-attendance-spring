@@ -2,7 +2,7 @@ package org.example.studentattendancespring.service;
 
 import org.example.studentattendancespring.entity.TeacherEntity;
 import org.example.studentattendancespring.exception.TeacherNotFoundException;
-import org.example.studentattendancespring.model.dto.Teacher;
+import org.example.studentattendancespring.dto.response.Teacher;
 import org.example.studentattendancespring.repository.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class TeacherService {
         return Teacher.toModel(teacher);
     }
 
-    public Teacher editTeacher(TeacherEntity teacher) {
+    public Teacher editTeacher(TeacherEntity teacher) throws TeacherNotFoundException{
         TeacherEntity teacherEntity = teacherRepo.findById(teacher.getId())
                 .orElseThrow(()-> new TeacherNotFoundException("Преподаватель не найден!"));
         teacherEntity.setFirstName(teacher.getFirstName());
@@ -34,7 +34,7 @@ public class TeacherService {
         return Teacher.toModel(teacherEntity);
     }
 
-    public Teacher getTeacher(Long id) {
+    public Teacher getTeacher(Long id) throws TeacherNotFoundException{
         TeacherEntity teacher = teacherRepo.findById(id)
                 .orElseThrow(()-> new TeacherNotFoundException("Преподаватель не найден!"));
         return Teacher.toModel(teacher);

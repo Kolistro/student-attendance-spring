@@ -2,8 +2,8 @@ package org.example.studentattendancespring.handler;
 
 import org.example.studentattendancespring.exception.GroupNotFoundException;
 import org.example.studentattendancespring.exception.GroupWithNameAlreadyExistsException;
-import org.example.studentattendancespring.model.dto.Group;
-import org.example.studentattendancespring.model.response.CommonResponse;
+import org.example.studentattendancespring.dto.response.Group;
+import org.example.studentattendancespring.dto.response.CommonResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

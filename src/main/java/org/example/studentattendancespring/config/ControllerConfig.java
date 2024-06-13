@@ -3,7 +3,10 @@ package org.example.studentattendancespring.config;
 import org.example.studentattendancespring.controller.*;
 import org.example.studentattendancespring.service.*;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+
+@Configuration
 public class ControllerConfig {
     @Bean
     public TeacherController teacherController(TeacherService teacherService) {

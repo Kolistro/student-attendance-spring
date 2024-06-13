@@ -7,7 +7,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface LessonRepo extends JpaRepository<LessonEntity,Long> {
-    LessonEntity findByDateAndLessonNumber(Timestamp date, int lessonNumber);
+    LessonEntity findByDateAndLessonNumberAndTeacherId(Timestamp date, int lessonNumber, Long teacherId);
+    LessonEntity findByDateAndLessonNumberAndGroupId(Timestamp date, int lessonNumber, Long groupId);
     List<LessonEntity> findAllByDateBetweenAndGroupId(Timestamp startDate, Timestamp endDate, Long groupId);
     List<LessonEntity> findAllByDateBetweenAndTeacherId(Timestamp startDate, Timestamp endDate, Long teacherId);
     List<LessonEntity> findByDateBetween(Timestamp startDate, Timestamp endDate);
